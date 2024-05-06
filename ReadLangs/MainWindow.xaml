@@ -13,18 +13,26 @@
                     <RowDefinition Height="*"></RowDefinition>
                     <RowDefinition Height="auto"></RowDefinition>
                 </Grid.RowDefinitions>
-                <TextBox IsReadOnly="False" TextChanged="mainTextBox_TextChanged" TextWrapping="Wrap" TextAlignment="Justify" SelectionChanged="mainTextBox_SelectionChanged" ScrollViewer.VerticalScrollBarVisibility="Auto" ScrollViewer.ScrollChanged="mainTextBox_ScrollChanged" Focusable="True" Margin="5" Grid.Row="0" x:Name="mainTextBox" AcceptsReturn="True"></TextBox>
+                <TextBox FontSize="15" IsReadOnly="False" TextChanged="mainTextBox_TextChanged" TextWrapping="Wrap" TextAlignment="Justify" SelectionChanged="mainTextBox_SelectionChanged" ScrollViewer.VerticalScrollBarVisibility="Auto" ScrollViewer.ScrollChanged="mainTextBox_ScrollChanged" Focusable="True" Margin="5" Grid.Row="0" x:Name="mainTextBox" AcceptsReturn="True"></TextBox>
                 <TextBlock Margin="5" x:Name="translationView" Grid.Row="1" />
             </Grid>
         </TabItem>
         <TabItem Header="Training">
-            
+
         </TabItem>
         <TabItem Header="Settings">
-            <StackPanel HorizontalAlignment="Left" VerticalAlignment="Top" Background="#aaaaaa">
-                <TextBlock Margin="5" Text="Enter your google API key:"/>
-                <TextBox Margin="5" x:Name="googleApiKeyInput" Width="200" MaxLines="1" />
-                <Button Click="saveKeyButton_Click" Margin="5" Padding="5" x:Name="saveKeyButton" HorizontalAlignment="Center" Content="Save Key" Width="auto" />
+            <StackPanel Width="200" HorizontalAlignment="Center" VerticalAlignment="Center">
+                <StackPanel HorizontalAlignment="Stretch" VerticalAlignment="Center" Background="#cccccc">
+                    <TextBlock Margin="5,5,5,0" Text="Enter your google API key:" HorizontalAlignment="Left" />
+                    <TextBox Margin="5" HorizontalAlignment="Stretch" x:Name="googleApiKeyInput" MaxLines="1" />
+                    <Button Click="saveKeyButton_Click" Margin="5" Padding="5" x:Name="saveKeyButton" HorizontalAlignment="Center" Content="Save key" Width="auto" />
+                </StackPanel>
+                <StackPanel HorizontalAlignment="Stretch">
+                    <TextBlock Margin="5" Text="Source language:" HorizontalAlignment="Left" />
+                    <ComboBox SelectedIndex="0" x:Name="sourceLanguageList" SelectionChanged="sourceLanguageList_SelectionChanged"></ComboBox>
+                    <TextBlock Margin="5" Text="Target language:" HorizontalAlignment="Left" />
+                    <ComboBox SelectedIndex="0" x:Name="targetLanguageList" SelectionChanged="targetLanguageList_SelectionChanged"></ComboBox>
+                </StackPanel>
             </StackPanel>
         </TabItem>
     </TabControl>

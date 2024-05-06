@@ -24,6 +24,17 @@ namespace ReadLangs
         {
             InitializeComponent();
 
+            //load source and target languages to settings:
+            List<Language> languages = new SupportedLanguages().Languages;
+
+            string sl = Settings.SourceLanguage;
+            sourceLanguageList.ItemsSource = languages;
+            sourceLanguageList.SelectedIndex = languages.FindIndex(l => l.Code == sl);
+
+            string tl = Settings.TargetLanguage;
+            targetLanguageList.ItemsSource = languages;
+            targetLanguageList.SelectedIndex = languages.FindIndex(l => l.Code == tl);
+
             //load cached text:
             if (File.Exists(savedTextPath))
             {
@@ -72,7 +83,7 @@ namespace ReadLangs
 
         private string FindWord()
         {
-            const string forbiddenCharacters = " ,./?<>()[]{}\\|+=-_!&'";
+            const string forbiddenCharacters = " ,./?<>()[]{}\\\n\r\t„“|+=-_!&'\"";
 
             int start = mainTextBox.SelectionStart;
             int end = mainTextBox.SelectionStart + mainTextBox.SelectionLength;
@@ -104,6 +115,24 @@ namespace ReadLangs
             }
 
             return mainTextBox.Text.Substring(start, end - start);
+        }
+
+        private void sourceLanguageList_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            Language newSource = sourceLanguageList.SelectedItem as Language;
+            if (newSource is not null)
+            {
+                Settings.SourceLanguage = newSource.Code;
+            }
+        }
+
+        private void targetLanguageList_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            Language newTarget = targetLanguageList.SelectedItem as Language;
+            if (newTarget is not null)
+            {
+                Settings.TargetLanguage = newTarget.Code;
+            }
         }
     }
 }
